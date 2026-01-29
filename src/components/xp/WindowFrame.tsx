@@ -25,7 +25,7 @@ export const WindowFrame = ({ id, title, children, initialPos = { x: 50, y: 50 }
 
     return (
         <motion.div
-            drag={!isMaximized}
+            drag={!isMaximized && window.innerWidth >= 768}
             dragControls={controls}
             dragListener={false} // Only drag from title bar
             dragMomentum={false}
@@ -37,9 +37,11 @@ export const WindowFrame = ({ id, title, children, initialPos = { x: 50, y: 50 }
                 height: "calc(100% - 30px)",
                 borderRadius: 0
             } : {
-                width: "min(800px, 95vw)",
-                height: "min(600px, 80vh)",
-                borderRadius: "0.5rem"
+                x: window.innerWidth < 768 ? 0 : initialPos.x,
+                y: window.innerWidth < 768 ? 0 : initialPos.y,
+                width: window.innerWidth < 768 ? "100%" : "min(800px, 95vw)",
+                height: window.innerWidth < 768 ? "calc(100% - 30px)" : "min(600px, 80vh)",
+                borderRadius: window.innerWidth < 768 ? 0 : "0.5rem"
             }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             style={{

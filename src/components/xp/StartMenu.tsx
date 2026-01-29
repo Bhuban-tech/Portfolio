@@ -17,7 +17,7 @@ export const StartMenu = ({ onClose }: { onClose: () => void }) => {
     };
 
     return (
-        <div className="w-[380px] h-[520px] bg-white rounded-t-lg shadow-[4px_4px_10px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden font-sans border-2 border-[#245edb] select-none">
+        <div className="w-[380px] max-w-[95vw] h-[520px] max-h-[80vh] bg-white rounded-t-lg shadow-[4px_4px_10px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden font-sans border-2 border-[#245edb] select-none">
             {/* Header */}
             <div className="h-[72px] bg-gradient-to-b from-[#245edb] to-[#4585f3] flex items-center px-4 gap-4 border-b border-orange-400 shadow-md relative z-10 overflow-hidden">
                 <div className="w-14 h-14 rounded-full border-2 border-white/80 overflow-hidden bg-yellow-200 shadow-xl relative z-20 group cursor-pointer hover:scale-105 transition-all">

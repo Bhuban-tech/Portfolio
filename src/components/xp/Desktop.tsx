@@ -58,7 +58,7 @@ export const Desktop = () => {
             />
 
             {/* Desktop Icons Grid */}
-            <div className="absolute top-0 left-0 bottom-[30px] w-full p-4 grid grid-flow-col grid-rows-[repeat(auto-fill,80px)] gap-4 content-start items-start justify-start z-0">
+            <div className="absolute top-0 left-0 bottom-[30px] w-full p-4 grid grid-cols-[repeat(auto-fill,80px)] md:grid-flow-col md:grid-rows-[repeat(auto-fill,80px)] gap-4 content-start items-start justify-start z-0 overflow-y-auto">
                 <DesktopIcon label="About Me" icon={User} type="system" onClick={() => openWindow('ABOUT', 'About Me')} />
                 <DesktopIcon label="My Projects" icon={Briefcase} type="ie" onClick={() => openWindow('PROJECTS', 'My Projects')} />
                 <DesktopIcon label="My Resume" icon={Star} type="pdf" onClick={() => openWindow('EXPERIENCE', 'My Resume')} />
