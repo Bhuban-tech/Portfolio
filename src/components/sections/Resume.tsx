@@ -14,6 +14,8 @@ export const Resume = () => {
                         <span>bhuban.bhandari05@gmail.com</span>
                         <span className="cv-dot">•</span>
                         <span>github.com/Bhuban-tech</span>
+                        <span className="cv-dot">•</span>
+                        <span>bhuban-bhandari.netlify.app</span>
                     </div>
                 </header>
 
