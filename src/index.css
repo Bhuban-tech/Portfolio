@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250, 250, 250;
+    /* #fafafa - Light Gray/White */
+    --foreground: 10, 10, 10;
+    /* #0a0a0a - Nearly Black */
+    --primary: 240, 240, 243;
+    /* #f0f0f3 - Soft White */
+    --accent: 0, 180, 216;
+    /* #00b4d8 - Cyan Blue (Readable on light) */
+    --neon-purple: 124, 58, 237;
+    /* #7c3aed - Violet (Readable on light) */
+    --card-bg: 255, 255, 255;
+    --border-color: 220, 220, 220;
+  }
+
+  .dark {
+    --background: 10, 10, 10;
+    /* #0a0a0a - Deep Black */
+    --foreground: 255, 255, 255;
+    /* #ffffff - White */
+    --primary: 15, 23, 42;
+    /* #0f172a - Dark Blue */
+    --accent: 0, 243, 255;
+    /* #00f3ff - Neon Cyan */
+    --neon-purple: 188, 19, 254;
+    /* #bc13fe - Neon Purple */
+    --card-bg: 255, 255, 255;
+    /* Opacity handled in classes */
+    --border-color: 255, 255, 255;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased overflow-x-hidden transition-colors duration-300;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+  }
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+}

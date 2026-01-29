@@ -1,0 +1,165 @@
+:root {
+    --primary-purple: #764bab;
+    --text-dark: #333333;
+    --text-gray: #666666;
+    --border-light: #e0e0e0;
+    --bg-white: #ffffff;
+    --bg-body: #f4f4f7;
+}
+
+.cv-container {
+    background-color: var(--bg-body);
+    width: 100%;
+    min-height: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.cv-page {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    padding: 2.5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    color: var(--text-dark);
+}
+
+.cv-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cv-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-purple);
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.contact-line {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.cv-dot {
+    color: var(--text-gray);
+    font-weight: bold;
+}
+
+.cv-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cv-section {
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-purple);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-divider {
+    height: 1px;
+    background-color: var(--primary-purple);
+    opacity: 0.3;
+    margin-bottom: 0.75rem;
+}
+
+.summary-text {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    text-align: justify;
+}
+
+.experience-item,
+.education-item {
+    margin-bottom: 1rem;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+.position-company,
+.degree-school {
+    color: var(--text-dark);
+}
+
+.item-date {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.item-bullets,
+.additional-bullets {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.item-bullets li {
+    margin-bottom: 0.25rem;
+}
+
+.school-info {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.print-btn-container {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.print-btn {
+    background-color: var(--primary-purple);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.print-btn:hover {
+    background-color: #5e3b8a;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .cv-container {
+        padding: 0;
+        background: white;
+    }
+
+    .cv-page {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+        max-width: none;
+    }
+}
