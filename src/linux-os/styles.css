@@ -1,0 +1,591 @@
+:root {
+    /* Base Colors */
+    --ubuntu-aubergine: #300a24;
+    --ubuntu-orange: #e95420;
+    --ubuntu-warm-grey: #aea79f;
+    --ubuntu-cool-grey: #333333;
+
+    /* Theme Defaults (Dark) */
+    --bg-desktop: #401030;
+    --font-main: 'Ubuntu', sans-serif;
+    --font-mono: 'Ubuntu Mono', monospace;
+    --window-bg: #1e1e1e;
+    --window-text: #ffffff;
+    --window-header-bg: #3c3c3c;
+    --window-header-text: #d3d7cf;
+    --terminal-bg: rgba(48, 10, 36, 0.95);
+    --dock-bg: rgba(48, 10, 36, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --sidebar-bg: rgba(255, 255, 255, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --top-bar-bg: rgba(0, 0, 0, 0.5);
+    --accent: #00ffcc;
+}
+
+[data-theme='light'] {
+    --window-bg: #ffffff;
+    --window-text: #1e293b;
+    --window-header-bg: #f1f5f9;
+    --window-header-text: #475569;
+    --terminal-bg: rgba(30, 41, 59, 0.98);
+    --dock-bg: rgba(255, 255, 255, 0.3);
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --sidebar-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --top-bar-bg: rgba(255, 255, 255, 0.2);
+    --accent: #772953;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body,
+html,
+#root {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-main);
+    overflow: hidden;
+    background-color: var(--ubuntu-aubergine);
+}
+
+/* Desktop Atmosphere */
+.desktop-environment {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Top Bar */
+.top-bar {
+    height: 28px;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    color: white;
+    font-size: 13px;
+    z-index: 1000;
+}
+
+.top-bar-left,
+.top-bar-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.top-bar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+}
+
+/* Desktop Icons Container */
+.desktop-icons {
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 80px);
+    grid-template-rows: repeat(auto-fill, 100px);
+    gap: 10px;
+    grid-auto-flow: column;
+    z-index: 10;
+    max-height: calc(100vh - 120px);
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.desktop-icon:hover .icon-wrapper {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.desktop-icon span {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    word-break: break-all;
+    max-width: 90px;
+    line-height: 1.2;
+}
+
+/* Dock */
+.dock-container {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(48, 10, 36, 0.4);
+    backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 20px;
+    padding: 10px 18px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+}
+
+.dock-item {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.dock-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.dock-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--ubuntu-orange);
+    border-radius: 50%;
+}
+
+.minimized-dot {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+}
+
+/* Windows */
+.os-window {
+    position: absolute;
+    background: var(--window-bg);
+    color: var(--window-text);
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 300px;
+    min-height: 200px;
+    z-index: 500;
+}
+
+.window-header {
+    height: 34px;
+    background: var(--window-header-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    cursor: move;
+    position: relative;
+    border-radius: 6px 6px 0 0;
+}
+
+.window-title {
+    font-size: 13px;
+    color: var(--window-header-text);
+    font-weight: 500;
+}
+
+.window-controls {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    overflow: hidden;
+}
+
+.control-btn:hover {
+    filter: brightness(1.2);
+    transform: scale(1.1);
+}
+
+.btn-close {
+    background: #FF5F57;
+    color: #4c0000;
+}
+
+.btn-min {
+    background: #FFBD2E;
+    color: #5c4300;
+}
+
+.btn-max {
+    background: #28C840;
+    color: #004d00;
+}
+
+.window-content {
+    flex: 1;
+    background: white;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* File Explorer Styles */
+.explorer-container {
+    display: flex;
+    flex: 1;
+    background: white;
+}
+
+.explorer-sidebar {
+    width: 160px;
+    background: #f1f1f1;
+    border-right: 1px solid #dcdcdc;
+    padding: 10px 0;
+}
+
+.sidebar-item {
+    padding: 6px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-item:hover {
+    background: #e5e5e5;
+}
+
+.sidebar-item.active {
+    background: #e95420;
+    color: white;
+}
+
+.explorer-main {
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 90px);
+    grid-gap: 20px;
+    align-content: flex-start;
+}
+
+/* Terminal Window Specific */
+.window-terminal {
+    background: var(--terminal-bg);
+}
+
+.window-terminal .window-content {
+    background: var(--terminal-bg);
+    color: white;
+}
+
+.window-terminal .window-header {
+    background: #3c3c3c;
+}
+
+.window-terminal .window-title {
+    color: #d3d7cf;
+}
+
+/* Terminal Internal Styles */
+.terminal {
+    height: 100%;
+    padding: 10px;
+    font-family: var(--font-mono);
+    overflow-y: auto;
+}
+
+.prompt-line {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.user-host {
+    color: #8ae234;
+    font-weight: bold;
+}
+
+.path {
+    color: #729fcf;
+    font-weight: bold;
+}
+
+.output-line {
+    margin: 2px 0;
+    white-space: pre-wrap;
+    font-size: 14px;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: var(--font-mono);
+    outline: none;
+    flex: 1;
+}
+
+/* Music Player App */
+.music-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #1e1e1e;
+    color: white;
+}
+
+.music-visualizer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #1e1e1e 0%, #300a24 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.viz-bar {
+    width: 4px;
+    background: var(--ubuntu-orange);
+    margin: 0 2px;
+    border-radius: 2px;
+}
+
+.music-controls {
+    height: 80px;
+    background: #2d2d2d;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 20px;
+}
+
+.song-info {
+    flex: 1;
+}
+
+.song-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.artist-name {
+    font-size: 12px;
+    color: var(--ubuntu-warm-grey);
+}
+
+.playback-btns {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Boot Sequence stays identical */
+.boot-sequence {
+    padding: 20px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #dfdbd2;
+    background: black;
+    width: 100%;
+    height: 100%;
+}
+
+/* Animations */
+@keyframes window-open {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-open {
+    animation: window-open 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+@keyframes bar-anim {
+    0% {
+        height: 10px;
+    }
+
+    50% {
+        height: 40px;
+    }
+
+    100% {
+        height: 10px;
+    }
+}
+
+.viz-bar-anim {
+    animation: bar-anim 0.5s ease-in-out infinite;
+}
+
+/* Mobile Responsiveness (Phase 9.1) */
+@media screen and (max-width: 768px) {
+    .desktop-widgets {
+        display: none !important;
+    }
+
+    .desktop-icons {
+        grid-template-columns: repeat(auto-fill, 70px) !important;
+        grid-template-rows: repeat(auto-fill, 95px) !important;
+        padding: 10px !important;
+        gap: 5px !important;
+    }
+
+    .dock-container {
+        width: 95% !important;
+        bottom: 10px !important;
+        padding: 6px !important;
+        gap: 10px !important;
+        justify-content: center !important;
+    }
+
+    .os-window {
+        width: 100vw !important;
+        height: calc(100vh - 28px) !important;
+        left: 0 !important;
+        top: 28px !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        z-index: 1001 !important;
+    }
+
+    .window-header {
+        height: 48px !important;
+    }
+
+    .icon-wrapper {
+        width: 48px !important;
+        height: 48px !important;
+        backdrop-filter: none;
+        /* Better performance on mobile */
+    }
+
+    .desktop-icon span {
+        font-size: 10px !important;
+        max-width: 60px !important;
+    }
+
+    .top-bar-center {
+        display: none;
+    }
+}
+
+/* Utility Styles */
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.success-text {
+    color: #8ae234 !important;
+}
+
+.error-text {
+    color: #ef2929 !important;
+}
+
+.cursor-blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
